@@ -81,6 +81,45 @@ struct node* InsertAfterNode(struct node* Head, int data, int Location){
     return Head;
 }
 
+struct node* DeleteAtBegin(struct node* Head){
+    if(Head == NULL){
+        printf("Linked List is empty and deletion is not possible.\n");
+        return Head;
+    }
+    
+    struct node* Mover = Head;
+
+    Head = Mover->next;
+    free(Mover);
+
+    return Head;
+}
+
+struct node* DeleteAtEnd(struct node* Head){
+    if(Head == NULL){
+        printf("Linked List is empty and deletion is not possible.\n");
+        return Head;
+    }
+    
+     if(Head->next == NULL){
+        free(Head);
+        return NULL;
+    }
+
+    struct node* Mover = Head;
+    struct node* Prev = NULL;
+
+    while(Mover->next != NULL){
+        Prev = Mover;
+        Mover = Mover->next;
+    }
+
+    Prev->next = NULL;   
+    free(Mover);         
+
+    return Head;
+}
+
 void displayList(struct node* Head){
 
     if(Head == NULL){
@@ -105,7 +144,7 @@ int main(){
     int choice;
 
     while(1){
-        printf("Enter choice:\n1. Display List\n2. Insert at Begin\n3. Insert at End\n4. Insert after specific location\n5. Exit\n");
+        printf("Enter choice:\n1. Display List\n2. Insert at Begin\n3. Insert at End\n4. Insert after specific location\n5. Delete Node from the Beginning\n6. Delete Node from the end\n7. Exit\n");
         scanf("%d",&choice);
         switch (choice){
         case 1:{
@@ -136,6 +175,14 @@ int main(){
             break;
         }
         case 5:{
+            Head = DeleteAtBegin(Head);
+            break;
+        }
+        case 6:{
+            Head = DeleteAtEnd(Head);
+            break;
+        }
+        case 7:{
             exit(0);
             break;  
         }  
