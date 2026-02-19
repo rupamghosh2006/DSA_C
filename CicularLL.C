@@ -61,6 +61,20 @@ struct node* InsertAtEnd(struct node* Head, int data){
     return Head;
 }
 
+void display(struct node* Head){
+    if(Head == NULL){
+        printf("\nList is empty!\n");
+        return;
+    }
+    struct node* Mover = Head;
+    printf("Head");
+    do {
+       printf("-->%d",Mover->data);
+       Mover = Mover->next;
+    } while (Mover != Head);
+    printf("\n");
+}
+
 int main(){
     struct node* Head = NULL;
     int choice, data;
@@ -68,7 +82,8 @@ int main(){
     while(1){
         printf("\n1. Insert At Beginning");
         printf("\n2. Insert At End");
-        printf("\n3. Exit");
+        printf("\n3. Display");
+        printf("\n4. Exit");
         printf("\nEnter choice: ");
         scanf("%d", &choice);
 
@@ -84,8 +99,10 @@ int main(){
                 scanf("%d", &data);
                 Head = InsertAtEnd(Head, data);
                 break;
-
             case 3:
+                display(Head);
+                break;
+            case 4:
                 exit(0);
 
             default:
